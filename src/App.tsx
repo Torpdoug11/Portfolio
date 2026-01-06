@@ -29,15 +29,20 @@ const App = () => {
           <div className="container mx-auto px-4 py-20 md:py-32 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               <motion.div
-                className="mx-auto mb-6 h-28 w-28 md:h-32 md:w-32 rounded-full overflow-hidden ring-2 ring-primary/30 shadow-lg"
+                className="mx-auto mb-6 h-28 w-28 md:h-32 md:w-32 rounded-full overflow-hidden ring-2 ring-primary/30 shadow-lg relative"
                 initial={{ opacity: 0, y: 12, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.5 }}
               >
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/25 to-secondary/25">
+                  <span className="text-xl md:text-2xl font-bold text-gray-900/80 dark:text-gray-100/90">
+                    AM
+                  </span>
+                </div>
                 <img
                   src="/profile.jpg"
                   alt="Andrew Mokosa Elangwe Jr"
-                  className="h-full w-full object-cover"
+                  className="absolute inset-0 h-full w-full object-cover"
                   loading="eager"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
@@ -101,8 +106,23 @@ const App = () => {
                 I design and build modern, responsive websites and secure, scalable applications, with strong foundations in cloud systems, networking, and cybersecurity.
               </p>
               <p className="text-lg">
-                With expertise in full-stack development and a passion for creating intuitive user experiences, I help businesses establish a strong online presence through custom web solutions.
+                I hold a BSc in Cybersecurity from ICT University (Cameroon), and I combine strong technical fundamentals with clean UI/UX to help businesses establish a credible online presence.
               </p>
+
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="card p-4 text-center">
+                  <div className="text-sm text-gray-500 dark:text-gray-400">Born</div>
+                  <div className="font-semibold">23 January 2005</div>
+                </div>
+                <div className="card p-4 text-center">
+                  <div className="text-sm text-gray-500 dark:text-gray-400">Education</div>
+                  <div className="font-semibold">BSc Cybersecurity</div>
+                </div>
+                <div className="card p-4 text-center">
+                  <div className="text-sm text-gray-500 dark:text-gray-400">Height</div>
+                  <div className="font-semibold">6ft</div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
