@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeProvider } from './context/ThemeContext';
 import { DesignModeSelector } from './components/ui/DesignModeSelector';
 import Navbar from './components/Navbar';
