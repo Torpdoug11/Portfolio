@@ -19,7 +19,7 @@ const AppWrapper = () => {
 // Main App Component
 const App = () => {
   return (
-    <div className="min-h-screen bg-bg text-text transition-colors duration-200">
+    <div className="min-h-screen bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-200">
       <Navbar />
       <DesignModeSelector />
       
@@ -28,6 +28,23 @@ const App = () => {
         <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
           <div className="container mx-auto px-4 py-20 md:py-32 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
+              <motion.div
+                className="mx-auto mb-6 h-28 w-28 md:h-32 md:w-32 rounded-full overflow-hidden ring-2 ring-primary/30 shadow-lg"
+                initial={{ opacity: 0, y: 12, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <img
+                  src="/profile.jpg"
+                  alt="Andrew Mokosa Elangwe Jr"
+                  className="h-full w-full object-cover"
+                  loading="eager"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                  }}
+                />
+              </motion.div>
+
               <motion.h1 
                 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary"
                 initial={{ opacity: 0, y: 20 }}
