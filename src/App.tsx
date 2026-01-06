@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { ThemeProvider } from './context/ThemeContext';
 import { DesignModeSelector } from './components/ui/DesignModeSelector';
 import Navbar from './components/Navbar';
