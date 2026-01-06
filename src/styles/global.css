@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+:root {
+  --color-primary: #3b82f6;
+  --color-secondary: #6366f1;
+  --color-accent: #8b5cf6;
+  --color-text: #1f2937;
+  --color-bg: #ffffff;
+  --color-card: #f9fafb;
+  --color-border: #e5e7eb;
+}
+
+.dark {
+  --color-text: #f3f4f6;
+  --color-bg: #111827;
+  --color-card: #1f2937;
+  --color-border: #374151;
+}
+
+/* Neo-Cyber Theme */
+[data-theme="neo-cyber"] {
+  --color-primary: #00f0ff;
+  --color-secondary: #ff00ff;
+  --color-accent: #00ff9d;
+}
+
+[data-theme="neo-cyber"] .card {
+  @apply bg-opacity-10 backdrop-blur-sm border border-opacity-20 border-cyan-500 shadow-lg shadow-cyan-500/10;
+}
+
+[data-theme="neo-cyber"] .btn-primary {
+  @apply bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50;
+}
+
+/* Modern Website Theme */
+[data-theme="modern-website"] {
+  --color-primary: #2563eb;
+  --color-secondary: #4f46e5;
+  --color-accent: #7c3aed;
+}
+
+[data-theme="modern-website"] .card {
+  @apply bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow;
+}
+
+[data-theme="modern-website"] .btn-primary {
+  @apply bg-blue-600 hover:bg-blue-700 text-white font-medium;
+}
+
+/* Minimal Luxury Theme */
+[data-theme="minimal-luxury"] {
+  --color-primary: #8b5cf6;
+  --color-secondary: #a78bfa;
+  --color-accent: #c4b5fd;
+}
+
+[data-theme="minimal-luxury"] .card {
+  @apply bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-100 dark:border-gray-700 rounded-xl shadow-sm;
+}
+
+[data-theme="minimal-luxury"] .btn-primary {
+  @apply bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-medium tracking-wide;
+}
+
+/* Base component styles */
+body {
+  @apply bg-bg text-text transition-colors duration-200;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold tracking-tight;
+}
+
+h1 { @apply text-4xl md:text-5xl; }
+h2 { @apply text-3xl md:text-4xl; }
+h3 { @apply text-2xl md:text-3xl; }
+h4 { @apply text-xl md:text-2xl; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  @apply w-2 h-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-600 rounded-full hover:bg-gray-400 dark:hover:bg-gray-500;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Custom components */
+.btn {
+  @apply px-6 py-2 rounded-lg transition-all duration-200 flex items-center justify-center gap-2;
+}
+
+.btn-primary {
+  @apply bg-primary text-white hover:opacity-90 active:scale-95;
+}
+
+.card {
+  @apply rounded-xl p-6 transition-all duration-200;
+}
+
+/* Terminal styles */
+.terminal {
+  @apply bg-gray-900 text-green-400 font-mono p-4 rounded-lg overflow-auto max-h-96;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  box-shadow: 0 0 0 1px rgba(74, 222, 128, 0.3);
+}
+
+.terminal-line {
+  @apply flex items-start gap-2;
+}
+
+.terminal-prompt {
+  @apply text-green-400 select-none;
+}
+
+.terminal-cursor {
+  @apply inline-block w-2 h-5 bg-green-400 animate-pulse;
+}
+
+/* Contact section */
+.contact-item {
+  @apply flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .container {
+    @apply px-4;
+  }
+}
