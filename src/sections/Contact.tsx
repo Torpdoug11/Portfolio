@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiMail, FiPhone, FiMapPin, FiCopy, FiCheck } from 'react-icons/fi';
 import { FiGithub, FiLinkedin, FiTwitter } from 'react-icons/fi';
+import { initEmailJS, sendEmail } from '../config/emailjs';
 
 const Contact = () => {
   const [copied, setCopied] = useState<string | null>(null);
@@ -79,8 +80,18 @@ const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      // Replace with your form submission logic
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Initialize EmailJS if not already initialized
+      initEmailJS();
+      
+      // Send email using EmailJS
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        to_email: 'fortitudeamazon@gmail.com',
+      };
+      
+      await sendEmail(templateParams);
       
       setSubmitStatus({
         success: true,
@@ -90,6 +101,7 @@ const Contact = () => {
       // Reset form
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
+      console.error('Email send error:', error);
       setSubmitStatus({
         success: false,
         message: 'Something went wrong. Please try again later.'
