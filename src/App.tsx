@@ -105,8 +105,11 @@ const App = () => {
               <p className="text-lg mb-6">
                 I design and build modern, responsive websites and secure, scalable applications, with strong foundations in cloud systems, networking, and cybersecurity.
               </p>
-              <p className="text-lg">
+              <p className="text-lg mb-6">
                 I hold a BSc in Cybersecurity from ICT University (Cameroon), and I combine strong technical fundamentals with clean UI/UX to help businesses establish a credible online presence.
+              </p>
+              <p className="text-lg">
+                Previously worked as a DLP Security Agent at Camtel, where I specialized in data loss prevention and security monitoring to protect sensitive information and ensure compliance with security protocols.
               </p>
 
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
