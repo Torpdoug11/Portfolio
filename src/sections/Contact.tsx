@@ -18,8 +18,8 @@ const Contact = () => {
     {
       icon: <FiMail className="w-6 h-6" />,
       title: 'Email',
-      value: 'mokosaandrewelangwejr@gmail.com',
-      action: 'mailto:mokosaandrewelangwejr@gmail.com',
+      value: 'fortitudeamazon@gmail.com',
+      action: 'mailto:fortitudeamazon@gmail.com',
     },
     {
       icon: <FiPhone className="w-6 h-6" />,
@@ -30,8 +30,8 @@ const Contact = () => {
     {
       icon: <FiMapPin className="w-6 h-6" />,
       title: 'Location',
-      value: 'Buea, Cameroon',
-      action: 'https://maps.google.com/?q=Buea,Cameroon',
+      value: 'Yaounde, Cameroon',
+      action: 'https://maps.google.com/?q=Yaounde,Cameroon',
     },
   ];
 
