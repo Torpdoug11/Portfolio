@@ -14,7 +14,10 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ success: boolean; message: string } | null>(null);
+  const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const dragRef = useRef<HTMLDivElement>(null);
 
   const contactMethods = [
     {
@@ -129,6 +132,78 @@ const Contact = () => {
         clearTimeout(timeoutRef.current);
       }
     };
+  }, []);
+
+  // Draggable functionality
+  useEffect(() => {
+    const button = dragRef.current;
+    if (!button) return;
+
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let initialX = buttonPosition.x;
+    let initialY = buttonPosition.y;
+
+    const handleMouseDown = (e: MouseEvent) => {
+      isDragging = true;
+      startX = e.clientX - initialX;
+      startY = e.clientY - initialY;
+      setIsDragging(true);
+      button.style.cursor = 'grabbing';
+      button.style.transition = 'none';
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging) return;
+      
+      const newX = e.clientX - startX;
+      const newY = e.clientY - startY;
+      
+      // Keep button within viewport bounds
+      const maxX = window.innerWidth - button.offsetWidth - 24;
+      const maxY = window.innerHeight - button.offsetHeight - 24;
+      
+      setButtonPosition({
+        x: Math.max(0, Math.min(newX, maxX)),
+        y: Math.max(0, Math.min(newY, maxY))
+      });
+    };
+
+    const handleMouseUp = () => {
+      isDragging = false;
+      setIsDragging(false);
+      button.style.cursor = 'grab';
+      button.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+    };
+
+    button.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      button.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [buttonPosition]);
+
+  // Save position to localStorage
+  useEffect(() => {
+    localStorage.setItem('whatsappButtonPosition', JSON.stringify(buttonPosition));
+  }, [buttonPosition]);
+
+  // Load position from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('whatsappButtonPosition');
+    if (saved) {
+      try {
+        const position = JSON.parse(saved);
+        setButtonPosition(position);
+      } catch (e) {
+        console.error('Failed to load button position:', e);
+      }
+    }
   }, []);
 
   return (
@@ -302,18 +377,32 @@ const Contact = () => {
       </section>
 
       {/* Floating WhatsApp Button */}
-      <a
-        href="https://wa.me/237683531162"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed top-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
-        aria-label="Chat on WhatsApp"
+      <div
+        ref={dragRef}
+        style={{
+          position: 'fixed',
+          top: `${buttonPosition.y}px`,
+          right: `${buttonPosition.x}px`,
+          zIndex: 50,
+          cursor: isDragging ? 'grabbing' : 'grab',
+          transition: isDragging ? 'none' : 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        }}
+        className="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
       >
-        <FaWhatsapp className="w-6 h-6" />
-        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full animate-pulse">
-          Chat
-        </span>
-      </a>
+        <a
+          href="https://wa.me/237683531162"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center"
+          aria-label="Chat on WhatsApp"
+          draggable={false}
+        >
+          <FaWhatsapp className="w-6 h-6 animate-bounce" />
+          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full animate-pulse">
+            Chat
+          </span>
+        </a>
+      </div>
     </>
   );
 };
