@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiMail, FiPhone, FiMapPin, FiCopy, FiCheck } from 'react-icons/fi';
 import { FiGithub, FiLinkedin, FiTwitter } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
 import { initEmailJS, sendEmail } from '../config/emailjs';
 
 const Contact = () => {
@@ -27,6 +28,12 @@ const Contact = () => {
       title: 'Phone',
       value: '+237 677 576 208',
       action: 'tel:+237677576208',
+    },
+    {
+      icon: <FaWhatsapp className="w-6 h-6" />,
+      title: 'WhatsApp',
+      value: '+237 683 531 162',
+      action: 'https://wa.me/237683531162',
     },
     {
       icon: <FiMapPin className="w-6 h-6" />,
